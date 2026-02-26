@@ -24,18 +24,20 @@
 <section>
     <h2>Contact Form</h2>
 
-    <form action="https://formspree.io/f/mzdaoabe" method="POST"></form>
+    <form id="contactForm" action="https://formspree.io/f/mzdaoabe" method="POST">
 
         <label>Name:</label><br>
-        <input type="text" name="name" required><br><br>
+        <input type="text" id="name" name="name" required><br><br>
 
         <label>Email:</label><br>
-        <input type="email" name="email" required><br><br>
+        <input type="email" id="email" name="email" required><br><br>
 
         <label>Message:</label><br>
-        <textarea name="message" rows="5" required></textarea><br><br>
+        <textarea id="message" name="message" rows="5" required></textarea><br><br>
 
         <button type="submit">Send Message</button>
+
+        <p id="formMessage"></p>
 
     </form>
 </section>
@@ -43,6 +45,26 @@
 <footer>
     <p>© 2025 Anzish Gul | CS 224L Web Technologies</p>
 </footer>
+
+<script>
+document.getElementById("contactForm").addEventListener("submit", function(event) {
+
+    let name = document.getElementById("name").value.trim();
+    let email = document.getElementById("email").value.trim();
+    let message = document.getElementById("message").value.trim();
+    let formMessage = document.getElementById("formMessage");
+
+    if (name === "" || email === "" || message === "") {
+        event.preventDefault();
+        formMessage.style.color = "red";
+        formMessage.innerText = "Please fill in all fields!";
+        return;
+    }
+
+    formMessage.style.color = "green";
+    formMessage.innerText = "Sending message...";
+});
+</script>
 
 </body>
 </html>
